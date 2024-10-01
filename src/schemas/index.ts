@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-const SkillSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-});
+// const SkillSchema = z.object({
+//   id: z.string().optional(),
+//   name: z.string(),
+// });
 
 export const LeadSchema = z.object({
   company_name: z.string(),
@@ -11,7 +11,7 @@ export const LeadSchema = z.object({
   platform: z.string(),
   role: z.string(),
   advert_role: z.string(),
-  skills: z.array(SkillSchema),
+  skills: z.string(),
   work_type: z.string(),
   salary: z.string().optional(),
   URL: z.string().url(),
