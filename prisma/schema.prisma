@@ -13,14 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Skills {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String  @unique
+  leads  Leads?  @relation(fields: [leadId], references: [id])
+  leadId String? @db.ObjectId
+}
+
 model Leads {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   company_name String
   account_name String
   platform     String
   role         String
   advert_role  String
-  skills       String
+  skills       Skills[]
   work_type    String
   salary       String?
   URL          String
