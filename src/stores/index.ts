@@ -1,10 +1,6 @@
 import { create } from "zustand";
 
-type Skill = {
-  name: string;
-};
-
-type LeadsInfo = {
+type Leads = {
   company_name: string;
   account_name: string;
   platform: string;
@@ -17,11 +13,11 @@ type LeadsInfo = {
 };
 
 type LeadsStore = {
-  leadsInfo: LeadsInfo | null;
-  setLeadsInfo: (data: LeadsInfo) => void;
+  leads: Leads[];
+  setLeads: (data: Leads[]) => void;
 };
 
 export const useLeadsStore = create<LeadsStore>((set) => ({
-  leadsInfo: null,
-  setLeadsInfo: (data) => set({ leadsInfo: data }),
+  leads: [],
+  setLeads: (leads) => set({ leads }),
 }));

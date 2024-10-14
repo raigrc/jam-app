@@ -19,19 +19,22 @@ import { useLeadsStore } from "@/stores";
 import { leads } from "@/actions/add-leads";
 
 const LeadsForm = () => {
-  const { leadsInfo, setLeadsInfo } = useLeadsStore((state) => state);
+  // const { addLeads } = useLeadsStore((state) => state);
   const [isPending, startTransition] = useTransition();
 
   type validationSchema = z.infer<typeof LeadSchema>;
 
   const form = useForm<validationSchema>({
     resolver: zodResolver(LeadSchema),
-    defaultValues: { ...leadsInfo },
+    // defaultValues: { ...addLeads },
   });
 
   const handleSubmit = (values: validationSchema) => {
-    startTransition(() => {
-      leads(values);
+    startTransition(async () => {
+      const newLead = await leads(values);
+      if (!newLead?.error) {
+        // addLeads(newLead);
+      }
     });
   };
 
