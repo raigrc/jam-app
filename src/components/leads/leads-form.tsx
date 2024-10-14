@@ -10,6 +10,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -19,22 +27,19 @@ import { useLeadsStore } from "@/stores";
 import { leads } from "@/actions/add-leads";
 
 const LeadsForm = () => {
-  // const { addLeads } = useLeadsStore((state) => state);
+  const { defaultLeadValues } = useLeadsStore((state) => state);
   const [isPending, startTransition] = useTransition();
 
   type validationSchema = z.infer<typeof LeadSchema>;
 
   const form = useForm<validationSchema>({
     resolver: zodResolver(LeadSchema),
-    // defaultValues: { ...addLeads },
+    defaultValues: defaultLeadValues,
   });
 
   const handleSubmit = (values: validationSchema) => {
     startTransition(async () => {
-      const newLead = await leads(values);
-      if (!newLead?.error) {
-        // addLeads(newLead);
-      }
+      await leads(values);
     });
   };
 
@@ -75,7 +80,7 @@ const LeadsForm = () => {
                 control={form.control}
                 name="account_name"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
+                  <FormItem className="w-full">
                     <FormLabel>Account Name:</FormLabel>
                     <FormControl>
                       <Input placeholder="Account name" {...field} />
@@ -91,7 +96,7 @@ const LeadsForm = () => {
                 control={form.control}
                 name="platform"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
+                  <FormItem className="w-full">
                     <FormLabel>Platform:</FormLabel>
                     <FormControl>
                       <Input placeholder="Platform" {...field} />
@@ -108,7 +113,7 @@ const LeadsForm = () => {
                 control={form.control}
                 name="role"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
+                  <FormItem className="w-full">
                     <FormLabel>Role:</FormLabel>
                     <FormControl>
                       <Input placeholder="Role" {...field} />
@@ -121,7 +126,7 @@ const LeadsForm = () => {
                 control={form.control}
                 name="advert_role"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
+                  <FormItem className="w-full">
                     <FormLabel>Role from advert:</FormLabel>
                     <FormControl>
                       <Input placeholder="Role from advert" {...field} />
@@ -140,10 +145,7 @@ const LeadsForm = () => {
                 <FormItem>
                   <FormLabel>Skills</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="React, Javascript, Next JS..."
-                      {...field}
-                    />
+                    <Input placeholder="" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -151,50 +153,54 @@ const LeadsForm = () => {
             />
           </div>
           <div className="space-y-2">
-            {/* //! MAKE THIS A SELECT FIELD */}
-            <FormField
-              control={form.control}
-              name="work_type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type of work:</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Full Time, Part Time"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        console.log("Current value: ", e.target.value);
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex items-center justify-between space-x-4">
+              <FormField
+                control={form.control}
+                name="work_type"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Type of work:</FormLabel>
+                    <FormControl>
+                      <Select onValueChange={(value) => field.onChange(value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Type of work..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="FULLTIME">Full Time</SelectItem>
+                          <SelectItem value="PARTTIME">Part Time</SelectItem>
+                          <SelectItem value="TEMPORARY">Temporary</SelectItem>
+                          <SelectItem value="FREELANCE">Freelance</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="salary"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Salary Range:</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="$1000"
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          console.log("Current value: ", e.target.value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
-          <div className="space-y-2">
-            <FormField
-              control={form.control}
-              name="salary"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Salary Range:</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="$1000"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        console.log("Current value: ", e.target.value);
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+
           <div className="space-y-2">
             <FormField
               control={form.control}
