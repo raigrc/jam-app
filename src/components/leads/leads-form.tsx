@@ -78,14 +78,7 @@ const LeadsForm = () => {
                   <FormItem className="w-1/2">
                     <FormLabel>Account Name:</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Account name"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          console.log("Current value: ", e.target.value);
-                        }}
-                      />
+                      <Input placeholder="Account name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -101,14 +94,7 @@ const LeadsForm = () => {
                   <FormItem className="w-1/2">
                     <FormLabel>Platform:</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Platform"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          console.log("Current value: ", e.target.value);
-                        }}
-                      />
+                      <Input placeholder="Platform" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -125,14 +111,7 @@ const LeadsForm = () => {
                   <FormItem className="w-1/2">
                     <FormLabel>Role:</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Role"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          console.log("Current value: ", e.target.value);
-                        }}
-                      />
+                      <Input placeholder="Role" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -145,14 +124,7 @@ const LeadsForm = () => {
                   <FormItem className="w-1/2">
                     <FormLabel>Role from advert:</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Role from advert"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          console.log("Current value: ", e.target.value);
-                        }}
-                      />
+                      <Input placeholder="Role from advert" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
