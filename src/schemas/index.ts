@@ -15,4 +15,5 @@ export const LeadSchema = z.object({
   work_type: z.string(),
   salary: z.string().optional(),
   URL: z.string().url(),
+  remarks: z.string().optional(),
 });

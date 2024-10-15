@@ -25,10 +25,12 @@ import { z } from "zod";
 import { LeadSchema } from "@/schemas";
 import { useLeadsStore } from "@/stores";
 import { leads } from "@/actions/add-leads";
+import { Textarea } from "../ui/textarea";
 
 const LeadsForm = () => {
   const { defaultLeadValues } = useLeadsStore((state) => state);
   const [isPending, startTransition] = useTransition();
+  const resetLeads = useLeadsStore((state) => state.resetLeads);
 
   type validationSchema = z.infer<typeof LeadSchema>;
 
@@ -39,7 +41,15 @@ const LeadsForm = () => {
 
   const handleSubmit = (values: validationSchema) => {
     startTransition(async () => {
-      await leads(values);
+      try {
+        const leadData = await leads(values);
+
+        if (leadData.success) {
+          resetLeads();
+        }
+      } catch (error) {
+        console.error("Error submitting form!", error);
+      }
     });
   };
 
@@ -166,10 +176,13 @@ const LeadsForm = () => {
                           <SelectValue placeholder="Type of work..." />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="FULLTIME">Full Time</SelectItem>
-                          <SelectItem value="PARTTIME">Part Time</SelectItem>
-                          <SelectItem value="TEMPORARY">Temporary</SelectItem>
-                          <SelectItem value="FREELANCE">Freelance</SelectItem>
+                          <SelectItem value="Full Time">Full Time</SelectItem>
+                          <SelectItem value="Part Time">Part Time</SelectItem>
+                          <SelectItem value="Fresh Graduate">
+                            Fresh Graduate
+                          </SelectItem>
+                          <SelectItem value="Temporary">Temporary</SelectItem>
+                          <SelectItem value="Freelance">Freelance</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -216,6 +229,22 @@ const LeadsForm = () => {
                         console.log("Current value: ", e.target.value);
                       }}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <FormField
+              control={form.control}
+              name="remarks"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Remarks</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

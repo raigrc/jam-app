@@ -19,6 +19,7 @@ export const leads = async (data: z.infer<typeof LeadSchema>) => {
     work_type,
     salary,
     URL,
+    remarks,
   } = leadData.data;
 
   const skillsArray = skills.split(",").map((skill) => skill.trim());
@@ -35,6 +36,7 @@ export const leads = async (data: z.infer<typeof LeadSchema>) => {
         work_type,
         salary,
         URL,
+        remarks,
       },
     });
     return { success: "Successfully created lead!" };

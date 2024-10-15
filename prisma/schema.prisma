@@ -24,6 +24,7 @@ model Leads {
   work_type    String
   salary       String?
   URL          String
+  remarks      String?
   isApplied    Boolean  @default(false)
 
   createdAt      DateTime         @default(now())
