@@ -17,7 +17,6 @@ type LeadsStore = {
   leads: Leads[];
   setLeads: (data: Leads[]) => void;
   defaultLeadValues: Leads;
-  resetLeads: () => void;
 };
 
 export const useLeadsStore = create<LeadsStore>((set) => ({
@@ -35,6 +34,4 @@ export const useLeadsStore = create<LeadsStore>((set) => ({
     URL: "",
     remarks: "",
   },
-  resetLeads: () =>
-    set((state) => ({ defaultLeadValues: { ...state.defaultLeadValues } })),
 }));

@@ -30,7 +30,6 @@ import { Textarea } from "../ui/textarea";
 const LeadsForm = () => {
   const { defaultLeadValues } = useLeadsStore((state) => state);
   const [isPending, startTransition] = useTransition();
-  const resetLeads = useLeadsStore((state) => state.resetLeads);
 
   type validationSchema = z.infer<typeof LeadSchema>;
 
@@ -45,7 +44,7 @@ const LeadsForm = () => {
         const leadData = await leads(values);
 
         if (leadData.success) {
-          resetLeads();
+          form.reset();
         }
       } catch (error) {
         console.error("Error submitting form!", error);
