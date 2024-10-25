@@ -22,7 +22,7 @@ export const leads = async (data: z.infer<typeof LeadSchema>) => {
     remarks,
   } = leadData.data;
 
-  const skillsArray = skills.split(",").map((skill) => skill.trim());
+  // const skillsArray = skills.split(",").map((skill) => skill.trim());
 
   try {
     await prisma.leads.create({
@@ -32,7 +32,7 @@ export const leads = async (data: z.infer<typeof LeadSchema>) => {
         platform,
         role,
         advert_role,
-        skills: skillsArray,
+        skills,
         work_type,
         salary,
         URL,

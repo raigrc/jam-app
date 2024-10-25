@@ -40,6 +40,7 @@ const LeadsForm = () => {
   const handleSubmit = (values: validationSchema) => {
     startTransition(async () => {
       try {
+        // const skillsArray = values.skills.split(",").map((skill) => skill.trim());
         const leadData = await leads(values);
 
         if (leadData.success) {
@@ -222,7 +223,16 @@ const LeadsForm = () => {
               <FormItem>
                 <FormLabel>Skills:</FormLabel>
                 <FormControl>
-                  <Input placeholder="HTML, CSS, JS..." {...field} />
+                  <Input
+                    placeholder="HTML, CSS, JS..."
+                    {...field}
+                    onChange={(e) => {
+                      const skillsArray = e.target.value
+                        .split(",")
+                        .map((skill) => skill.trim());
+                      field.onChange(skillsArray);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

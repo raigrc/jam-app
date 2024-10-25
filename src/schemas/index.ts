@@ -11,7 +11,7 @@ export const LeadSchema = z.object({
   platform: z.string(),
   role: z.string(),
   advert_role: z.string(),
-  skills: z.string(),
+  skills: z.array(z.string()),
   work_type: z.string(),
   salary: z.string().optional(),
   URL: z.string().url(),
