@@ -14,14 +14,15 @@ const CardWrapper: React.FC<CardWrapperProps> = ({
   children,
   title,
   className,
+  footer,
 }) => {
   return (
     <Card>
       <CardHeader>
         <Header title={title} />
       </CardHeader>
-      <CardContent className="overflow-x-auto w-full">{children}</CardContent>
-      <CardFooter></CardFooter>
+      <CardContent className="w-full overflow-x-auto">{children}</CardContent>
+      <CardFooter>{footer}</CardFooter>
     </Card>
   );
 };

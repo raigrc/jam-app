@@ -17,6 +17,7 @@ import { updateStatus } from "@/actions/update-status";
 
 const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
   const [isPending, startTransition] = useTransition();
+
   const changeStatus = (id: string | undefined) => {
     startTransition(async () => {
       try {
@@ -28,12 +29,13 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
       }
     });
   };
+
   return (
     <Table className="min-w-[2500px] table-auto">
       <TableHeader>
         <TableRow>
           <TableHead>Applied?</TableHead>
-          <TableHead className="w-1/12">Date</TableHead>
+          <TableHead className="w-1/12 text-center">Date</TableHead>
           <TableHead className="w-1/12">Company Name</TableHead>
           <TableHead className="w-1/12">Platform</TableHead>
           <TableHead className="w-1/12">Role</TableHead>
@@ -49,11 +51,11 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
         {leads.map((lead) => (
           <TableRow
             key={lead.id}
-            className={`${lead.status ? "bg-green-500 text-muted hover:text-muted-foreground" : ""}`}
+            className={`${lead.isApplied ? "bg-green-500 text-muted hover:text-muted-foreground" : ""}`}
           >
-            <TableCell className="space-x-2">
-              {lead.status ? (
-                ""
+            <TableCell className="grid place-items-center">
+              {lead.isApplied ? (
+                <FaCheck />
               ) : (
                 <Button
                   variant="success"
@@ -64,7 +66,7 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
                 </Button>
               )}
             </TableCell>
-            <TableCell>
+            <TableCell className="text-center">
               {lead.createdAt.toLocaleString().split("T")[0]}
             </TableCell>
             <TableCell>{lead.company_name}</TableCell>

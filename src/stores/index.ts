@@ -21,7 +21,8 @@ export const useLeadsStore = create<LeadsStore>((set) => ({
     salary: "",
     URL: "",
     remarks: "",
-    status: false,
+    isApplied: false,
+    status: "",
     createdAt: new Date(),
   },
 }));

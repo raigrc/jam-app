@@ -4,6 +4,7 @@ export interface CardWrapperProps {
   children: React.ReactNode;
   title: string;
   className?: string;
+  footer: React.ReactNode;
 }
 
 export interface Leads {
@@ -18,7 +19,8 @@ export interface Leads {
   salary: string;
   URL: string;
   remarks: string;
-  status: boolean | null;
+  isApplied: boolean | null;
+  status: string;
   createdAt: string | Date;
 }
 

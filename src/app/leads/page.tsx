@@ -1,15 +1,22 @@
 "use client";
 import CardWrapper from "@/components/card-wrapper";
+import LeadsPagination from "@/components/leads/leads-pagination";
 import LeadsTable from "@/components/leads/leads-table";
 import { useLeadsStore } from "@/stores";
-import React, { useEffect } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const LeadsPage = () => {
   const { leads, setLeads } = useLeadsStore();
+  const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const leadsData = async () => {
-      const response = await fetch("/api/leads");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+
+  const leadsData = async (page: number) => {
+    try {
+      const response = await fetch(`/api/leads?page=${page}`);
       if (!response.ok) {
         throw new Error("Failed fetching data");
       }
@@ -17,13 +24,27 @@ const LeadsPage = () => {
       console.log(data);
 
       setLeads(data.leads);
-    };
-    leadsData();
-  }, [setLeads]);
+      setCurrentPage(data.pagination.page);
+      setTotalPages(data.pagination.totalPages);
+    } catch (error) {
+      console.error("Error Fetching leads", error);
+    }
+  };
+
+  useEffect(() => {
+    const page = Number(searchParams.get("page")) || 1;
+    leadsData(page);
+    setCurrentPage(page);
+  }, [searchParams]);
 
   return (
     <div className="">
-      <CardWrapper title="Leads">
+      <CardWrapper
+        title="Leads"
+        footer={
+          <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
+        }
+      >
         <LeadsTable leads={leads} />
       </CardWrapper>
     </div>
