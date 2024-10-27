@@ -28,7 +28,11 @@ const JobAppPage = () => {
   }, []);
   return (
     <CardWrapper title="Job Application">
-      <JobApplicationTable leads={leads} jobApp={applications} />
+      <JobApplicationTable
+        leads={leads}
+        jobApp={applications}
+        onStatusChange={fetchData}
+      />
     </CardWrapper>
   );
 };

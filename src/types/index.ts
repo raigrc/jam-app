@@ -32,8 +32,10 @@ export interface JobAppProps {
 
 export interface LeadsProps {
   leads: Leads[];
+  onApplyChange?: (status: (boolean | null)[]) => void;
 }
 
 export interface LeadsJobProps extends LeadsProps {
   jobApp: JobAppProps[];
+  onStatusChange: () => void;
 }

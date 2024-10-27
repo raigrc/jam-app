@@ -19,11 +19,11 @@ import {
 import { LeadsJobProps } from "@/types";
 import { updateJobStatus } from "@/actions/update-job-status";
 
-const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp }) => {
+const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp, onStatusChange }) => {
   const handleChange = async (id: string | undefined, status: string) => {
     console.log({ id, status });
     await updateJobStatus(id, status).then((data) => {
-      if (data?.success) window.location.reload();
+      if (data?.success) onStatusChange();
     });
   };
   return (

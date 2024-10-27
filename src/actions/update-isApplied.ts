@@ -22,7 +22,6 @@ export const updateIsApplied = async (id: string | undefined) => {
         },
       },
     });
-
     return { success: true };
   } catch (error) {
     console.error("Error updating from actions", error);
