@@ -13,7 +13,7 @@ import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { FaCheck } from "react-icons/fa6";
-import { updateStatus } from "@/actions/update-status";
+import { updateIsApplied } from "@/actions/update-isApplied";
 
 const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
   const [isPending, startTransition] = useTransition();
@@ -21,8 +21,8 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
   const changeStatus = (id: string | undefined) => {
     startTransition(async () => {
       try {
-        await updateStatus(id).then((data) => {
-          if (data.success) window.location.href = "/leads";
+        await updateIsApplied(id).then((data) => {
+          if (data?.success) window.location.href = "/leads";
         });
       } catch (error) {
         console.error("Error updating status", error);
@@ -43,7 +43,7 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
           <TableHead className="w-2/12">Skills</TableHead>
           <TableHead className="w-1/12">Type of work</TableHead>
           <TableHead className="w-1/12">Salary</TableHead>
-          <TableHead className="w-1/12">URL</TableHead>
+          <TableHead>URL</TableHead>
           <TableHead className="w-1/12">Remarks</TableHead>
         </TableRow>
       </TableHeader>

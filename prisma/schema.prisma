@@ -26,18 +26,18 @@ model Leads {
   URL          String
   remarks      String?
   isApplied    Boolean  @default(false)
-  status       String?
 
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  JobApplication JobApplication[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  JobApplication   JobApplication? @relation("LeadJobApplication")
+  JobApplicationId String?         @db.ObjectId
 }
 
 model JobApplication {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  leads   Leads  @relation(fields: [leadsId], references: [id])
-  leadsId String @db.ObjectId
-  status  String
+  leads   Leads  @relation("LeadJobApplication", fields: [leadsId], references: [id])
+  leadsId String @unique @db.ObjectId
+  status  String @default("Waiting for reply")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

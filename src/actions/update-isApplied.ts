@@ -1,7 +1,6 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
-export const updateStatus = async (id: string | undefined) => {
+export const updateIsApplied = async (id: string | undefined) => {
   if (!id) {
     return { error: "ID is undefined" };
   }
@@ -9,12 +8,21 @@ export const updateStatus = async (id: string | undefined) => {
   try {
     await prisma.leads.update({
       data: {
-        status: "true",
+        isApplied: true,
       },
       where: {
         id,
       },
     });
+
+    await prisma.jobApplication.create({
+      data: {
+        leads: {
+          connect: { id },
+        },
+      },
+    });
+
     return { success: true };
   } catch (error) {
     console.error("Error updating from actions", error);
