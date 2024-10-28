@@ -21,7 +21,7 @@ const CardWrapper: React.FC<CardWrapperProps> = ({
       <CardHeader>
         <Header title={title} />
       </CardHeader>
-      <CardContent className="w-full overflow-x-auto space-y-4">{children}</CardContent>
+      <CardContent className="w-full overflow-x-auto space-y-4 py-2">{children}</CardContent>
       {/* <CardFooter>{footer}</CardFooter> */}
     </Card>
   );
