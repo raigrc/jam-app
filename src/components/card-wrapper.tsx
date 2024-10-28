@@ -17,12 +17,12 @@ const CardWrapper: React.FC<CardWrapperProps> = ({
   footer,
 }) => {
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader>
         <Header title={title} />
       </CardHeader>
-      <CardContent className="w-full overflow-x-auto">{children}</CardContent>
-      <CardFooter>{footer}</CardFooter>
+      <CardContent className="w-full overflow-x-auto space-y-4">{children}</CardContent>
+      {/* <CardFooter>{footer}</CardFooter> */}
     </Card>
   );
 };

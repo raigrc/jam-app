@@ -13,7 +13,10 @@ export const LeadSchema = z.object({
   advert_role: z.string(),
   skills: z.array(z.string()),
   work_type: z.string(),
-  salary: z.string().optional(),
+  salary: z.string(),
   URL: z.string().url(),
-  remarks: z.string().optional(),
+  remarks: z.string(),
+  isApplied: z.boolean(),
+  status: z.string(),
+  createdAt: z.date(),
 });

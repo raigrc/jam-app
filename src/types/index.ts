@@ -1,5 +1,13 @@
 import React from "react";
 
+export interface LeadsStore {
+  leads: Leads[];
+  setLeads: (data: Leads[]) => void;
+  defaultLeadValues: Leads;
+  addLeads: (data: Leads) => void;
+  recentLeads: () => void;
+}
+
 export interface CardWrapperProps {
   children: React.ReactNode;
   title: string;
@@ -8,20 +16,20 @@ export interface CardWrapperProps {
 }
 
 export interface Leads {
-  id?: string;
-  company_name: string;
-  account_name: string;
-  platform: string;
-  role: string;
-  advert_role: string;
-  skills: string[];
-  work_type: string;
-  salary: string;
-  URL: string;
-  remarks: string;
-  isApplied: boolean | null;
-  status: string;
-  createdAt: string | Date;
+  id?: string | undefined;
+  company_name: string | undefined;
+  account_name: string | undefined;
+  platform: string | undefined;
+  role: string | undefined;
+  advert_role: string | undefined;
+  skills: string[] | undefined;
+  work_type: string | undefined;
+  salary: string | undefined;
+  URL: string | undefined;
+  remarks: string | undefined;
+  isApplied: boolean | undefined;
+  status: string | undefined;
+  createdAt: Date | undefined;
 }
 
 export interface JobAppProps {
@@ -32,7 +40,7 @@ export interface JobAppProps {
 
 export interface LeadsProps {
   leads: Leads[];
-  onApplyChange?: (status: (boolean | null)[]) => void;
+  changeIsApplied?: (isApplied: boolean | undefined) => void;
 }
 
 export interface LeadsJobProps extends LeadsProps {

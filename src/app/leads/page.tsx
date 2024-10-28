@@ -1,11 +1,12 @@
 "use client";
+import { updateIsApplied } from "@/actions/update-isApplied";
 import CardWrapper from "@/components/card-wrapper";
 import LeadsPagination from "@/components/leads/leads-pagination";
 import LeadsTable from "@/components/leads/leads-table";
 import { useLeadsStore } from "@/stores";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 
 const LeadsPage = () => {
   const { leads, setLeads } = useLeadsStore();
@@ -13,8 +14,9 @@ const LeadsPage = () => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [applied, setApplied] = useState(false);
 
-  const leadsData = async (page: number) => {
+  const fetchData = async (page: number) => {
     try {
       const response = await fetch(`/api/leads?page=${page}`);
       if (!response.ok) {
@@ -33,19 +35,18 @@ const LeadsPage = () => {
 
   useEffect(() => {
     const page = Number(searchParams.get("page")) || 1;
-    leadsData(page);
+    fetchData(page);
     setCurrentPage(page);
-  }, [searchParams]);
+  }, [searchParams, applied]);
 
   return (
     <div className="">
-      <CardWrapper
-        title="Leads"
-        footer={
-          <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
-        }
-      >
-        <LeadsTable leads={leads} />
+      <CardWrapper title="Leads">
+        <LeadsTable
+          leads={leads}
+          changeIsApplied={() => setApplied(!applied)}
+        />
+        <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
       </CardWrapper>
     </div>
   );

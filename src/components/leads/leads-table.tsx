@@ -15,23 +15,22 @@ import { Button } from "../ui/button";
 import { FaCheck } from "react-icons/fa6";
 import { updateIsApplied } from "@/actions/update-isApplied";
 
-const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
+const LeadsTable: React.FC<LeadsProps> = ({ leads, changeIsApplied }) => {
   const [isPending, startTransition] = useTransition();
 
-  const changeStatus = (id: string | undefined) => {
+  const handleChange = (id: string | undefined) => {
     startTransition(async () => {
       try {
         await updateIsApplied(id).then((data) => {
-          if (data?.success) window.location.href = "/leads";
+          if (data.success) changeIsApplied?.(true ? true : false);
         });
       } catch (error) {
         console.error("Error updating status", error);
       }
     });
   };
-
   return (
-    <Table className="min-w-[2500px] table-auto">
+    <Table className="table-auto">
       <TableHeader>
         <TableRow>
           <TableHead>Applied?</TableHead>
@@ -60,21 +59,21 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
                 <Button
                   variant="success"
                   size="icon"
-                  onClick={() => changeStatus(lead.id)}
+                  onClick={() => handleChange(lead.id)}
                 >
                   <FaCheck />
                 </Button>
               )}
             </TableCell>
             <TableCell className="text-center">
-              {lead.createdAt.toLocaleString().split("T")[0]}
+              {lead.createdAt?.toLocaleString().split("T")[0]}
             </TableCell>
             <TableCell>{lead.company_name}</TableCell>
             <TableCell>{lead.platform}</TableCell>
             <TableCell>{lead.role}</TableCell>
             <TableCell>{lead.advert_role}</TableCell>
             <TableCell>
-              {lead.skills.map((skill, index) => (
+              {lead.skills?.map((skill, index) => (
                 <Badge className="m-1" key={index}>
                   {skill}
                 </Badge>
@@ -83,7 +82,7 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads }) => {
             <TableCell>{lead.work_type}</TableCell>
             <TableCell>{lead.salary}</TableCell>
             <TableCell>
-              <Link href={lead.URL} target="_blank">
+              <Link href={lead.URL as string} target="_blank">
                 {lead.URL}
               </Link>
             </TableCell>

@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 
 export const leads = async (data: z.infer<typeof LeadSchema>) => {
   const leadData = LeadSchema.safeParse(data);
-  console.log("From actions: ", leadData);
 
   if (!leadData.success) return { error: "Invalid Fields!" };
 

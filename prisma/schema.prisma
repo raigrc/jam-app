@@ -35,7 +35,7 @@ model Leads {
 
 model JobApplication {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  leads   Leads  @relation("LeadJobApplication", fields: [leadsId], references: [id])
+  leads   Leads  @relation("LeadJobApplication", fields: [leadsId], references: [id], onDelete: Cascade)
   leadsId String @unique @db.ObjectId
   status  String @default("Waiting for reply")
 

@@ -25,9 +25,10 @@ import { LeadSchema } from "@/schemas";
 import { useLeadsStore } from "@/stores";
 import { leads } from "@/actions/add-leads";
 import { Textarea } from "../ui/textarea";
+import CardWrapper from "../card-wrapper";
 
 const LeadsForm = () => {
-  const { defaultLeadValues } = useLeadsStore((state) => state);
+  const { defaultLeadValues, addLeads } = useLeadsStore((state) => state);
   const [isPending, startTransition] = useTransition();
 
   type validationSchema = z.infer<typeof LeadSchema>;
@@ -44,6 +45,7 @@ const LeadsForm = () => {
         const leadData = await leads(values);
 
         if (leadData.success) {
+          addLeads(values);
           form.reset();
         }
       } catch (error) {
@@ -53,7 +55,7 @@ const LeadsForm = () => {
   };
 
   return (
-    <>
+    <CardWrapper title="Add Leads" className="w-3/4">
       <Form {...form}>
         <form
           className="space-y-6 py-4"
@@ -267,10 +269,10 @@ const LeadsForm = () => {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          <Button className="float-right" type="submit">Submit</Button>
         </form>
       </Form>
-    </>
+    </CardWrapper>
   );
 };
 

@@ -1,15 +1,20 @@
-import { Leads } from "@/types";
+import { Leads, LeadsStore } from "@/types";
 import { create } from "zustand";
-
-type LeadsStore = {
-  leads: Leads[];
-  setLeads: (data: Leads[]) => void;
-  defaultLeadValues: Leads;
-};
 
 export const useLeadsStore = create<LeadsStore>((set) => ({
   leads: [],
   setLeads: (leads) => set({ leads }),
+  addLeads: (leads) => set((prev) => ({ leads: [leads, ...prev.leads] })),
+  recentLeads: async () => {
+    const response = await fetch("/api/leads");
+    if (!response.ok) {
+      throw new Error("Failed fetching data");
+    }
+    const data = await response.json();
+    set({
+      leads: data.leads,
+    });
+  },
   defaultLeadValues: {
     company_name: "",
     account_name: "",

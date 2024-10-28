@@ -8,6 +8,7 @@ export const GET = async (req: NextRequest) => {
         where: {
           isApplied: true,
         },
+        orderBy: { updatedAt: "desc" },
         include: {
           JobApplication: true,
         },
