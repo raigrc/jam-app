@@ -1,28 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import useFetch from "@/hooks/useFetch";
+import React from "react";
 
 const DashboardPage = () => {
-  const [count, setCount] = useState();
-  const fetchData = async () => {
-    try {
-      const response = await fetch("/api/count-job-app");
-      if (!response.ok) {
-        throw new Error("Error fetching data");
-      }
+  const { data } = useFetch({
+    url: "/api/count-job-app",
+    select: (data) => ({
+      count: data.count,
+    }),
+  });
 
-      const data = await response.json();
-
-      console.log(data);
-      setCount(data.count);
-    } catch (error) {
-      console.error("Unexpected error fetching data on client", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  return <div>{count}</div>;
+  return <div>{data?.count}</div>;
 };
 
 export default DashboardPage;
