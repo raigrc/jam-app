@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
+import { IconContext } from "react-icons";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,7 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="mx-auto max-w-screen-xl space-y-4 relative">
+          <div className="relative mx-auto max-w-screen-xl space-y-4">
             <Navbar />
             {children}
           </div>
