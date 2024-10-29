@@ -1,6 +1,7 @@
 "use client";
 import CardWrapper from "@/components/card-wrapper";
 import JobApplicationTable from "@/components/jobApplication/job-application-table";
+import LinkButton from "@/components/link-button";
 import React, { useEffect, useState } from "react";
 
 const JobAppPage = () => {
@@ -27,13 +28,20 @@ const JobAppPage = () => {
     fetchData();
   }, []);
   return (
-    <CardWrapper title="Job Application">
-      <JobApplicationTable
-        leads={leads}
-        jobApp={applications}
-        onStatusChange={fetchData}
-      />
-    </CardWrapper>
+    <>
+      <div className="space-x-2 flex justify-end">
+        <LinkButton href="/leads" name="Leads" />
+        <LinkButton href="/add-leads" name="Add Lead" />
+      </div>
+
+      <CardWrapper title="Job Application">
+        <JobApplicationTable
+          leads={leads}
+          jobApp={applications}
+          onStatusChange={fetchData}
+        />
+      </CardWrapper>
+    </>
   );
 };
 

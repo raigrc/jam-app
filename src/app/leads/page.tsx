@@ -1,12 +1,12 @@
 "use client";
-import { updateIsApplied } from "@/actions/update-isApplied";
+
 import CardWrapper from "@/components/card-wrapper";
 import LeadsPagination from "@/components/leads/leads-pagination";
 import LeadsTable from "@/components/leads/leads-table";
 import { useLeadsStore } from "@/stores";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
+import LinkButton from "@/components/link-button";
 
 const LeadsPage = () => {
   const { leads, setLeads } = useLeadsStore();
@@ -40,7 +40,12 @@ const LeadsPage = () => {
   }, [searchParams, applied]);
 
   return (
-    <div className="">
+    <>
+      <div className="flex items-center space-x-2 justify-end">
+        <LinkButton href="/add-leads" name="Add Lead" />
+        <LinkButton href="/job-application" name="Job Applications" />
+      </div>
+
       <CardWrapper title="Leads">
         <LeadsTable
           leads={leads}
@@ -48,7 +53,7 @@ const LeadsPage = () => {
         />
         <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
       </CardWrapper>
-    </div>
+    </>
   );
 };
 
