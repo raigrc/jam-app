@@ -41,9 +41,8 @@ const LeadsPage = () => {
 
   return (
     <>
-      <div className="flex items-center space-x-2 justify-end">
+      <div className="flex items-center justify-end">
         <LinkButton href="/add-leads" name="Add Lead" />
-        <LinkButton href="/job-application" name="Job Applications" />
       </div>
 
       <CardWrapper title="Leads">

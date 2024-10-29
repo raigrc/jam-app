@@ -29,8 +29,7 @@ const JobAppPage = () => {
   }, []);
   return (
     <>
-      <div className="space-x-2 flex justify-end">
-        <LinkButton href="/leads" name="Leads" />
+      <div className="flex justify-end items-center">
         <LinkButton href="/add-leads" name="Add Lead" />
       </div>
 
