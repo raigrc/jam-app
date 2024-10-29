@@ -7,16 +7,20 @@ export const GET = async (req: NextRequest) => {
     const startOfDay = new Date(today.setHours(0, 0, 0, 0));
     const endOfDay = new Date(today.setHours(23, 59, 59, 999));
 
-    const count = await prisma.jobApplication.count({
-      where: {
-        updatedAt: {
-          gte: startOfDay,
-          lte: endOfDay,
+    const [pr, leads, applications] = [
+      await prisma.jobApplication.count({
+        where: {
+          updatedAt: {
+            gte: startOfDay,
+            lte: endOfDay,
+          },
         },
-      },
-    });
+      }),
+      await prisma.leads.count({}),
+      await prisma.jobApplication.count({}),
+    ];
 
-    return NextResponse.json({ count });
+    return NextResponse.json({ count: { pr, leads, applications } });
   } catch (error) {
     console.error("Unexpected error on fetching data", error);
   }

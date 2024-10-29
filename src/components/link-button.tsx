@@ -2,11 +2,11 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 
-const LinkButton = ({ href, name }: { href: string; name: string }) => {
+const LinkButton = () => {
   return (
-    <div className="flex justify-end items-center pb-2">
+    <div className="flex items-center justify-end pb-2">
       <Button>
-        <Link href={href}>{name}</Link>
+        <Link href="/add-leads">Add Lead</Link>
       </Button>
     </div>
   );

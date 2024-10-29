@@ -12,7 +12,6 @@ export interface CardWrapperProps {
   children: React.ReactNode;
   title: string;
   className?: string;
-  footer?: React.ReactNode;
 }
 
 export interface Leads {
@@ -46,4 +45,10 @@ export interface LeadsProps {
 export interface LeadsJobProps extends LeadsProps {
   jobApp: JobAppProps[];
   onStatusChange: () => void;
+}
+
+export interface DataCountProps {
+  positiveResponse: number | undefined;
+  leads: number | undefined;
+  applications: number | undefined;
 }

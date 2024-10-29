@@ -41,10 +41,6 @@ const LeadsPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-end">
-        <LinkButton href="/add-leads" name="Add Lead" />
-      </div>
-
       <CardWrapper title="Leads">
         <LeadsTable
           leads={leads}

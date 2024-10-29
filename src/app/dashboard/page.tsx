@@ -1,11 +1,15 @@
 "use client";
+import CardWrapper from "@/components/card-wrapper";
+import DataCount from "@/components/dashboard/data-count";
 import React, { useEffect, useState } from "react";
 
 const DashboardPage = () => {
-  const [count, setCount] = useState();
+  const [prCount, setPrCount] = useState<number>(0);
+  const [leadsCount, setLeadsCount] = useState<number>(0);
+  const [applicationCount, setApplicationCout] = useState<number>(0);
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/count-job-app");
+      const response = await fetch("/api/dashboard");
       if (!response.ok) {
         throw new Error("Error fetching data");
       }
@@ -13,7 +17,9 @@ const DashboardPage = () => {
       const data = await response.json();
 
       console.log(data);
-      setCount(data.count);
+      setPrCount(data.count.pr);
+      setLeadsCount(data.count.leads);
+      setApplicationCout(data.count.applications);
     } catch (error) {
       console.error("Unexpected error fetching data on client", error);
     }
@@ -22,7 +28,15 @@ const DashboardPage = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  return <div>{count}</div>;
+  return (
+    <CardWrapper title="Dashboard">
+      <DataCount
+        positiveResponse={prCount}
+        leads={leadsCount}
+        applications={applicationCount}
+      />
+    </CardWrapper>
+  );
 };
 
 export default DashboardPage;

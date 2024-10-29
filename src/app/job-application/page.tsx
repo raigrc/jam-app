@@ -29,10 +29,6 @@ const JobAppPage = () => {
   }, []);
   return (
     <>
-      <div className="flex justify-end items-center">
-        <LinkButton href="/add-leads" name="Add Lead" />
-      </div>
-
       <CardWrapper title="Job Application">
         <JobApplicationTable
           leads={leads}

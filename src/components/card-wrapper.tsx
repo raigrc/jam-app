@@ -9,19 +9,22 @@ import {
 } from "@/components/ui/card";
 import Header from "./header";
 import { CardWrapperProps } from "@/types";
+import LinkButton from "./link-button";
 
 const CardWrapper: React.FC<CardWrapperProps> = ({
   children,
   title,
   className,
-  footer,
 }) => {
   return (
     <Card className={className}>
-      <CardHeader className="pb-0">
+      <CardHeader className="flex flex-row items-center justify-between py-2">
         <Header title={title} />
+        <LinkButton />
       </CardHeader>
-      <CardContent className="w-full overflow-x-auto space-y-4">{children}</CardContent>
+      <CardContent className="w-full space-y-4 overflow-x-auto">
+        {children}
+      </CardContent>
       {/* <CardFooter>{footer}</CardFooter> */}
     </Card>
   );
