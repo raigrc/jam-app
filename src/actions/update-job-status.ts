@@ -13,6 +13,7 @@ export const updateJobStatus = async (
       },
       data: {
         status,
+        updatedAt: new Date(),
       },
     });
 
