@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { FaRegSquarePlus } from "react-icons/fa6";
 
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,6 +27,7 @@ import { useLeadsStore } from "@/stores";
 import { leads } from "@/actions/add-leads";
 import { Textarea } from "../ui/textarea";
 import CardWrapper from "../card-wrapper";
+import Platforms from "../platforms/new-platform";
 
 const LeadsForm = () => {
   const { defaultLeadValues, addLeads } = useLeadsStore((state) => state);
@@ -111,7 +113,14 @@ const LeadsForm = () => {
                         <SelectItem value="Jobstreet">Jobstreet</SelectItem>
                         <SelectItem value="Kalibrr">Kalibrr</SelectItem>
                         <SelectItem value="Facebook">Facebook</SelectItem>
-                        <SelectItem value="LinkeIn">LinkeIn</SelectItem>
+                        <SelectItem value="LinkedIn">LinkedIn</SelectItem>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start px-2 space-x-2"
+                        >
+                          <FaRegSquarePlus />
+                          <Platforms />
+                        </Button>
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -269,7 +278,9 @@ const LeadsForm = () => {
             )}
           />
 
-          <Button className="float-right" type="submit">Submit</Button>
+          <Button className="float-right" type="submit">
+            Submit
+          </Button>
         </form>
       </Form>
     </CardWrapper>

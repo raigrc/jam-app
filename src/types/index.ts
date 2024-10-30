@@ -52,3 +52,9 @@ export interface DataCountProps {
   leads: number | undefined;
   applications: number | undefined;
 }
+
+export interface DialogWrapperProps {
+  title: string;
+  trigger: string;
+  children: React.ReactNode;
+}
