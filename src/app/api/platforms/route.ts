@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
   try {
     const platforms = await prisma.platforms.findMany({
-      orderBy: { platform: "desc" },
+      orderBy: { platform: "asc" },
     });
 
     return NextResponse.json({ platforms });

@@ -28,11 +28,14 @@ const JobAppPage = () => {
   }, []);
   return (
     <>
-      <CardWrapper title="Job Application">
+      <CardWrapper title="Job Application" showButton>
         <JobApplicationTable
           leads={leads}
           jobApp={applications}
-          onStatusChange={fetchData}
+          onStatusChange={() => {
+            fetchData();
+            console.log("changed status!");
+          }}
         />
       </CardWrapper>
     </>

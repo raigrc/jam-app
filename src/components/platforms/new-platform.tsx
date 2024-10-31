@@ -1,7 +1,4 @@
-import React, {
-  useState,
-  useTransition,
-} from "react";
+import React, { useState, useTransition } from "react";
 import DialogWrapper from "../dialog-wrapper";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -17,13 +14,17 @@ const Platforms = () => {
   const [success, setSuccess] = useState<string | undefined>();
   const [error, setError] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
-  
+
   const handleSubmit = () => {
     startTransition(async () => {
       await addPlatform(value).then((data) => {
         if (data?.success) {
           addPlatforms({ platform: value });
           setSuccess(data.success);
+
+          setTimeout(() => {
+            setSuccess(undefined);
+          }, 3000);
         } else {
           setError(data?.error);
         }

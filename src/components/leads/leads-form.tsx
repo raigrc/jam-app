@@ -109,7 +109,7 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
                     <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>
                         <SelectValue placeholder="Platform..." />
-                      </SelectTrigger>{" "}
+                      </SelectTrigger>
                       <SelectContent>
                         {platforms.map((platform) => (
                           <SelectItem

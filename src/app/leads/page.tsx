@@ -40,7 +40,7 @@ const LeadsPage = () => {
 
   return (
     <>
-      <CardWrapper title="Leads">
+      <CardWrapper title="Leads" showButton>
         <LeadsTable
           leads={leads}
           changeIsApplied={() => setApplied(!applied)}

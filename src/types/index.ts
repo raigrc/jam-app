@@ -12,6 +12,7 @@ export interface CardWrapperProps {
   children: React.ReactNode;
   title: string;
   className?: string;
+  showButton?: boolean;
 }
 
 export interface Leads {

@@ -29,7 +29,7 @@ const DashboardPage = () => {
     fetchData();
   }, []);
   return (
-    <CardWrapper title="Dashboard">
+    <CardWrapper title="Dashboard" showButton>
       <DataCount
         positiveResponse={prCount}
         leads={leadsCount}
