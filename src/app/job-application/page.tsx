@@ -1,7 +1,6 @@
 "use client";
 import CardWrapper from "@/components/card-wrapper";
 import JobApplicationTable from "@/components/jobApplication/job-application-table";
-import LinkButton from "@/components/link-button";
 import React, { useEffect, useState } from "react";
 
 const JobAppPage = () => {

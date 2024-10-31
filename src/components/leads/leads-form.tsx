@@ -29,7 +29,6 @@ import { Textarea } from "../ui/textarea";
 import CardWrapper from "../card-wrapper";
 import Platforms from "../platforms/new-platform";
 import { LeadsFormProps } from "@/types";
-import { usePlatformStore } from "@/stores/platform";
 
 const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
   const { defaultLeadValues, addLeads } = useLeadsStore((state) => state);

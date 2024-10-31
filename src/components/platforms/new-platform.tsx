@@ -1,7 +1,4 @@
 import React, {
-  FormEvent,
-  useEffect,
-  useRef,
   useState,
   useTransition,
 } from "react";
@@ -15,10 +12,12 @@ import { usePlatformStore } from "@/stores/platform";
 
 const Platforms = () => {
   const { addPlatforms } = usePlatformStore((state) => state);
+
   const [value, setValue] = useState<string>("");
   const [success, setSuccess] = useState<string | undefined>();
   const [error, setError] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
+  
   const handleSubmit = () => {
     startTransition(async () => {
       await addPlatform(value).then((data) => {
