@@ -4,7 +4,6 @@ import JobApplicationTable from "@/components/jobApplication/job-application-tab
 import React, { useEffect, useState } from "react";
 
 const JobAppPage = () => {
-  const [applications, setApplications] = useState([]);
   const [leads, setLeads] = useState([]);
   const fetchData = async () => {
     try {
@@ -15,8 +14,6 @@ const JobAppPage = () => {
       }
 
       const data = await response.json();
-      console.log(data);
-      setApplications(data.jobApp);
       setLeads(data.leads);
     } catch (error) {
       console.error("Unexpected error when fetching data:", error);
@@ -31,7 +28,6 @@ const JobAppPage = () => {
       <CardWrapper title="Job Application" showButton>
         <JobApplicationTable
           leads={leads}
-          jobApp={applications}
           onStatusChange={() => {
             fetchData();
             console.log("changed status!");

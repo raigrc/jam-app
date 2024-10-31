@@ -30,6 +30,7 @@ export interface Leads {
   isApplied: boolean | undefined;
   status: string | undefined;
   createdAt: Date | undefined;
+  JobApplication?: JobAppProps;
 }
 
 export interface JobAppProps {
@@ -44,7 +45,7 @@ export interface LeadsProps {
 }
 
 export interface LeadsJobProps extends LeadsProps {
-  jobApp: JobAppProps[];
+  // jobApp: JobAppProps[];
   onStatusChange: () => void;
 }
 

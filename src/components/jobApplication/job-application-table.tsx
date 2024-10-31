@@ -17,7 +17,7 @@ import {
 import { LeadsJobProps } from "@/types";
 import { updateJobStatus } from "@/actions/update-job-status";
 
-const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp, onStatusChange }) => {
+const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, onStatusChange }) => {
   const handleChange = async (id: string | undefined, status: string) => {
     console.log({ id, status });
     await updateJobStatus(id, status).then((data) => {
@@ -39,31 +39,28 @@ const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp, onStatusC
         </TableRow>
       </TableHeader>
       <TableBody>
-        {leads.map((lead) => {
-          const relatedJobs = jobApp.filter((job) => job.leadsId === lead.id);
-
-          return relatedJobs.map((job) => (
+        {leads.map((lead) => (
             <TableRow key={lead.id}>
               <TableCell>
                 <Select
-                  value={job.status}
-                  onValueChange={(value) => handleChange(job.leadsId, value)}
+                  value={lead.JobApplication?.status}
+                  onValueChange={(value) => handleChange(lead.JobApplication?.leadsId, value)}
                 >
                   <SelectTrigger
                     className={
-                      job.status == "Waiting for reply"
+                      lead.JobApplication?.status == "Waiting for reply"
                         ? "bg-yellow-400"
-                        : job.status == "For Interview"
+                        : lead.JobApplication?.status == "For Interview"
                           ? "bg-green-400"
                           : "bg-red-400"
                     }
                   >
-                    {job.status}
+                    {lead.JobApplication?.status}
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem
                       className={
-                        job.status == "Waiting for reply" ? "hidden" : undefined
+                        lead.JobApplication?.status == "Waiting for reply" ? "hidden" : undefined
                       }
                       value="Waiting for reply"
                     >
@@ -71,7 +68,7 @@ const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp, onStatusC
                     </SelectItem>
                     <SelectItem
                       className={
-                        job.status == "For Interview" ? "hidden" : undefined
+                        lead.JobApplication?.status == "For Interview" ? "hidden" : undefined
                       }
                       value="For Interview"
                     >
@@ -79,14 +76,14 @@ const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp, onStatusC
                     </SelectItem>
                     <SelectItem
                       className={
-                        job.status == "Rejected" ? "hidden" : undefined
+                        lead.JobApplication?.status == "Rejected" ? "hidden" : undefined
                       }
                       value="Rejected"
                     >
                       Rejected
                     </SelectItem>
                     <SelectItem
-                      className={job.status == "Drop" ? "hidden" : undefined}
+                      className={lead.JobApplication?.status == "Drop" ? "hidden" : undefined}
                       value="Drop"
                     >
                       Drop
@@ -95,7 +92,7 @@ const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp, onStatusC
                 </Select>
               </TableCell>
               <TableCell>
-                {job.createdAt.toLocaleString().split("T")[0]}
+                {lead.JobApplication?.createdAt.toLocaleString().split("T")[0]}
               </TableCell>
               <TableCell>{lead.company_name}</TableCell>
               <TableCell>{lead.platform}</TableCell>
@@ -104,8 +101,7 @@ const JobApplicationTable: React.FC<LeadsJobProps> = ({ leads, jobApp, onStatusC
               <TableCell className="">{lead.URL}</TableCell>
               <TableCell>{lead.remarks}</TableCell>
             </TableRow>
-          ));
-        })}
+        ))}
       </TableBody>
     </Table>
   );

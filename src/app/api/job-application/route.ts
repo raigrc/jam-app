@@ -3,20 +3,17 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
-    const [leads, jobApp] = [
-      await prisma.leads.findMany({
-        where: {
-          isApplied: true,
-        },
-        orderBy: { updatedAt: "desc" },
-        include: {
-          JobApplication: true,
-        },
-      }),
-      await prisma.jobApplication.findMany({}),
-    ];
+    const leads = await prisma.leads.findMany({
+      where: {
+        isApplied: true,
+      },
+      orderBy: { updatedAt: "desc" },
+      include: {
+        JobApplication: true,
+      },
+    });
 
-    return NextResponse.json({ leads, jobApp });
+    return NextResponse.json({ leads });
   } catch (error) {
     console.error("Error getting job applications from api", error);
   }
