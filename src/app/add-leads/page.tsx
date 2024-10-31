@@ -1,12 +1,19 @@
 "use client";
 import LeadsForm from "@/components/leads/leads-form";
 import RecentApplication from "@/components/leads/recent-leads";
-import React from "react";
+import { usePlatformStore } from "@/stores/platform";
+import React, { useEffect } from "react";
 
 const AddLeadsPage = () => {
+  const { fetchPlatforms, platforms } = usePlatformStore((state) => state);
+
+  useEffect(() => {
+    fetchPlatforms();
+  }, []);
+
   return (
     <div className="flex w-full items-start justify-between space-x-4">
-      <LeadsForm />
+      <LeadsForm platforms={platforms} onUpdate={fetchPlatforms} />
       <RecentApplication />
     </div>
   );

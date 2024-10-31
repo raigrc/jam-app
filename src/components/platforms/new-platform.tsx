@@ -1,20 +1,49 @@
-import React, { FormEvent, useRef, useState } from "react";
+import React, {
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import DialogWrapper from "../dialog-wrapper";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { addPlatform } from "@/actions/add-platform";
-import FormMessage from "../form-message";
+import FormSuccess from "../form-success";
+import FormError from "../form-error";
+import { usePlatformStore } from "@/stores/platform";
 
 const Platforms = () => {
+  const { addPlatforms } = usePlatformStore((state) => state);
   const [value, setValue] = useState<string>("");
+  const [success, setSuccess] = useState<string | undefined>();
+  const [error, setError] = useState<string | undefined>();
+  const [isPending, startTransition] = useTransition();
   const handleSubmit = () => {
-    addPlatform(value);
+    startTransition(async () => {
+      await addPlatform(value).then((data) => {
+        if (data?.success) {
+          addPlatforms({ platform: value });
+          setSuccess(data.success);
+        } else {
+          setError(data?.error);
+        }
+      });
+    });
   };
   return (
     <DialogWrapper title="Add new platform" trigger="Platform">
-      <Input value={value} onChange={(e) => setValue(e.target.value)} />
+      <Input
+        value={value}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setValue(e.target.value);
+        }}
+        disabled={isPending}
+      />
       <Button onClick={handleSubmit}>Add Platform</Button>
-      <FormMessage message="Hello" />
+      <FormSuccess message={success} />
+      <FormError message={error} />
     </DialogWrapper>
   );
 };

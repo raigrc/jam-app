@@ -58,3 +58,20 @@ export interface DialogWrapperProps {
   trigger: string;
   children: React.ReactNode;
 }
+
+export interface Platforms {
+  id?: string;
+  platform: string;
+}
+
+export interface LeadsFormProps {
+  platforms: Platforms[];
+  onUpdate: () => void;
+}
+
+export interface PlatformStore {
+  platforms: Platforms[];
+  setPlatforms: (data: Platforms[]) => void;
+  addPlatforms: (data: Platforms) => void;
+  fetchPlatforms: () => void;
+}

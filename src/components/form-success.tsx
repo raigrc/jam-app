@@ -1,7 +1,8 @@
 import React from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 
-const FormMessage = ({ message }: { message: string }) => {
+const FormSuccess = ({ message }: { message: string | undefined }) => {
+  if (!message) return;
   return (
     <>
       <div className="flex items-center gap-1 rounded bg-accent p-2 font-medium text-accent-foreground">
@@ -12,4 +13,4 @@ const FormMessage = ({ message }: { message: string }) => {
   );
 };
 
-export default FormMessage;
+export default FormSuccess;

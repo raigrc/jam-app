@@ -28,8 +28,10 @@ import { leads } from "@/actions/add-leads";
 import { Textarea } from "../ui/textarea";
 import CardWrapper from "../card-wrapper";
 import Platforms from "../platforms/new-platform";
+import { LeadsFormProps } from "@/types";
+import { usePlatformStore } from "@/stores/platform";
 
-const LeadsForm = () => {
+const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
   const { defaultLeadValues, addLeads } = useLeadsStore((state) => state);
   const [isPending, startTransition] = useTransition();
 
@@ -48,6 +50,7 @@ const LeadsForm = () => {
 
         if (leadData.success) {
           addLeads(values);
+          onUpdate();
           form.reset();
         }
       } catch (error) {
@@ -107,16 +110,19 @@ const LeadsForm = () => {
                     <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>
                         <SelectValue placeholder="Platform..." />
-                      </SelectTrigger>
+                      </SelectTrigger>{" "}
                       <SelectContent>
-                        <SelectItem value="Indeed">Indeed</SelectItem>
-                        <SelectItem value="Jobstreet">Jobstreet</SelectItem>
-                        <SelectItem value="Kalibrr">Kalibrr</SelectItem>
-                        <SelectItem value="Facebook">Facebook</SelectItem>
-                        <SelectItem value="LinkedIn">LinkedIn</SelectItem>
+                        {platforms.map((platform) => (
+                          <SelectItem
+                            key={platform.id}
+                            value={platform.platform}
+                          >
+                            {platform.platform}
+                          </SelectItem>
+                        ))}
                         <Button
                           variant="ghost"
-                          className="w-full justify-start px-2 space-x-2"
+                          className="w-full justify-start space-x-2 px-2"
                         >
                           <FaRegSquarePlus />
                           <Platforms />
