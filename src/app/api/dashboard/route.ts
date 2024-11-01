@@ -14,6 +14,9 @@ export const GET = async (req: NextRequest) => {
             gte: startOfDay,
             lte: endOfDay,
           },
+          createdAt: {
+            lt: startOfDay,
+          },
         },
       }),
       await prisma.leads.count({}),
