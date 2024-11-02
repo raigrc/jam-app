@@ -17,6 +17,5 @@ export const LeadSchema = z.object({
   URL: z.string().url(),
   remarks: z.string(),
   isApplied: z.boolean(),
-  status: z.string(),
   createdAt: z.date(),
 });

@@ -32,11 +32,10 @@ const Platforms = () => {
     });
   };
   return (
-    <DialogWrapper title="Add new platform" trigger="Platform">
+    <DialogWrapper title="Add new platform" trigger="+ New Platform">
       <Input
         value={value}
         onChange={(e) => {
-          console.log(e.target.value);
           setValue(e.target.value);
         }}
         disabled={isPending}

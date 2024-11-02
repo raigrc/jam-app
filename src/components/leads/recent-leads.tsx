@@ -28,8 +28,8 @@ const RecentApplication = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {leads.map((lead) => (
-            <TableRow key={lead.id}>
+          {leads.map((lead, index) => (
+            <TableRow key={lead.id || index}>
               <TableCell>
                 {lead.company_name}
                 <div className="text-xs text-gray-400">{lead.role}</div>

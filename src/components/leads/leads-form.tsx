@@ -42,6 +42,7 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
   });
 
   const handleSubmit = (values: validationSchema) => {
+    console.log("Form submitted with values:", values);
     startTransition(async () => {
       try {
         // const skillsArray = values.skills.split(",").map((skill) => skill.trim());
@@ -119,13 +120,8 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
                             {platform.platform}
                           </SelectItem>
                         ))}
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start space-x-2 px-2"
-                        >
-                          <FaRegSquarePlus />
-                          <Platforms />
-                        </Button>
+
+                        <Platforms />
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -222,7 +218,6 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
                       {...field}
                       onChange={(e) => {
                         field.onChange(e);
-                        console.log("Current value: ", e.target.value);
                       }}
                     />
                   </FormControl>
@@ -283,7 +278,7 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
             )}
           />
 
-          <Button className="float-right" type="submit">
+          <Button className="float-right" type="submit" disabled={isPending}>
             Submit
           </Button>
         </form>
