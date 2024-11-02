@@ -27,7 +27,6 @@ const LeadsPage = () => {
         throw new Error("Failed fetching data");
       }
       const data = await response.json();
-      console.log(data);
 
       setLeads(data.leads);
       setCurrentPage(data.pagination.page);
@@ -42,14 +41,11 @@ const LeadsPage = () => {
       const response = await fetch(
         `/api/leads/filter?company_name=${company_name}`,
       );
-
       if (!response.ok) {
         throw new Error("Error fetching filters");
       }
 
       const data = await response.json();
-
-      console.log(data);
       setLeads(data.filteredLeads);
     } catch (error) {
       console.error("Network error: ", error);

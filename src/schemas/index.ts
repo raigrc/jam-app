@@ -1,10 +1,5 @@
 import { z } from "zod";
 
-// const SkillSchema = z.object({
-//   id: z.string().optional(),
-//   name: z.string(),
-// });
-
 export const LeadSchema = z.object({
   company_name: z.string(),
   account_name: z.string(),

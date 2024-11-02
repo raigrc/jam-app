@@ -42,10 +42,8 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
   });
 
   const handleSubmit = (values: validationSchema) => {
-    console.log("Form submitted with values:", values);
     startTransition(async () => {
       try {
-        // const skillsArray = values.skills.split(",").map((skill) => skill.trim());
         const leadData = await leads(values);
 
         if (leadData.success) {
@@ -99,7 +97,6 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
               )}
             />
 
-            {/*//! MAKE A PLATFORM MODEL IN PRISMA */}
             <FormField
               control={form.control}
               name="platform"

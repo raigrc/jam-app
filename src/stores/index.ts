@@ -1,4 +1,4 @@
-import { Leads, LeadsStore } from "@/types";
+import { LeadsStore } from "@/types";
 import { create } from "zustand";
 
 export const useLeadsStore = create<LeadsStore>((set) => ({

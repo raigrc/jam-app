@@ -16,7 +16,6 @@ const DashboardPage = () => {
 
       const data = await response.json();
 
-      console.log(data);
       setPrCount(data.count.pr);
       setLeadsCount(data.count.leads);
       setApplicationCout(data.count.applications);

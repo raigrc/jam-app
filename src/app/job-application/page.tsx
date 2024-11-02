@@ -61,7 +61,6 @@ const JobAppPage = () => {
           leads={application}
           onStatusChange={() => {
             fetchData(page);
-            console.log("changed status!");
           }}
         />
         <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
