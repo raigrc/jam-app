@@ -81,8 +81,8 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads, changeIsApplied }) => {
             <TableCell>{lead.work_type}</TableCell>
             <TableCell>{lead.salary}</TableCell>
             <TableCell>
-              <Link href={lead.URL as string} target="_blank">
-                {lead.URL}
+              <Link href={lead.URL as string} target="_blank" className="text-blue-600 hover:underline">
+                Link here
               </Link>
             </TableCell>
             <TableCell>{lead.remarks}</TableCell>

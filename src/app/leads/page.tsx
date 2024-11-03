@@ -12,8 +12,6 @@ const LeadsPage = () => {
   const { leads, setLeads } = useLeadsStore();
   const searchParams = useSearchParams();
 
-  const [filterValue, setFilterValue] = useState();
-
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [applied, setApplied] = useState(false);
@@ -21,7 +19,7 @@ const LeadsPage = () => {
   const fetchData = async (page: number, companyName?: string) => {
     try {
       const response = await fetch(
-        `/api/leads?company_name=${companyName}&page=${page}`,
+        `/api/leads?page=${page}`,
       );
       if (!response.ok) {
         throw new Error("Failed fetching data");

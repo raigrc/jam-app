@@ -12,6 +12,9 @@ export const GET = async (req: NextRequest) => {
           mode: "insensitive",
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
       take: 10,
       include: {
         JobApplication: true,
