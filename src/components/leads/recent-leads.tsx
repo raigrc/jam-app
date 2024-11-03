@@ -14,9 +14,9 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 
 const RecentApplication = () => {
-  const { leads, recentLeads } = useLeadsStore();
+  const { leads, fetchLeads } = useLeadsStore();
   useEffect(() => {
-    recentLeads();
+    fetchLeads();
   }, []);
 
   return (

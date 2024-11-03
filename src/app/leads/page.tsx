@@ -4,6 +4,7 @@ import CardWrapper from "@/components/card-wrapper";
 import Filters from "@/components/filters";
 import LeadsPagination from "@/components/leads/leads-pagination";
 import LeadsTable from "@/components/leads/leads-table";
+import SkeletonTable from "@/components/table-skeleton";
 import { useLeadsStore } from "@/stores";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -14,13 +15,13 @@ const LeadsPage = () => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [applied, setApplied] = useState(false);
+  const [applied, setApplied] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const fetchData = async (page: number, companyName?: string) => {
+  const fetchData = async (page: number) => {
+    setLoading(true);
     try {
-      const response = await fetch(
-        `/api/leads?page=${page}`,
-      );
+      const response = await fetch(`/api/leads?page=${page}`);
       if (!response.ok) {
         throw new Error("Failed fetching data");
       }
@@ -31,6 +32,8 @@ const LeadsPage = () => {
       setTotalPages(data.pagination.totalPages);
     } catch (error) {
       console.error("Error Fetching leads", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,6 +71,8 @@ const LeadsPage = () => {
           leads={leads}
           changeIsApplied={() => setApplied(!applied)}
         />
+
+        {loading && <SkeletonTable />}
         <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
       </CardWrapper>
     </>

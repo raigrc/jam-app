@@ -5,7 +5,7 @@ export const useLeadsStore = create<LeadsStore>((set) => ({
   leads: [],
   setLeads: (leads) => set({ leads }),
   addLeads: (leads) => set((prev) => ({ leads: [leads, ...prev.leads] })),
-  recentLeads: async () => {
+  fetchLeads: async () => {
     const response = await fetch("/api/leads");
     if (!response.ok) {
       throw new Error("Failed fetching data");

@@ -3,6 +3,7 @@ import CardWrapper from "@/components/card-wrapper";
 import Filters from "@/components/filters";
 import JobApplicationTable from "@/components/jobApplication/job-application-table";
 import LeadsPagination from "@/components/leads/leads-pagination";
+import SkeletonTable from "@/components/table-skeleton";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -13,8 +14,10 @@ const JobAppPage = () => {
   const [application, setApplication] = useState([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fetchData = async (page: number) => {
+    setLoading(true);
     try {
       const response = await fetch(`/api/job-application?page=${page}`);
 
@@ -28,6 +31,8 @@ const JobAppPage = () => {
       setCurrentPage(data.pagination.page);
     } catch (error) {
       console.error("Unexpected error when fetching data:", error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -63,6 +68,7 @@ const JobAppPage = () => {
             fetchData(page);
           }}
         />
+        {loading && <SkeletonTable />}
         <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
       </CardWrapper>
     </>

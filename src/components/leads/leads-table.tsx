@@ -41,7 +41,7 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads, changeIsApplied }) => {
           <TableHead className="w-2/12">Skills</TableHead>
           <TableHead className="w-1/12">Type of work</TableHead>
           <TableHead className="w-1/12">Salary</TableHead>
-          <TableHead>URL</TableHead>
+          <TableHead className="w-1/12">URL</TableHead>
           <TableHead className="w-1/12">Remarks</TableHead>
         </TableRow>
       </TableHeader>
@@ -81,7 +81,11 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads, changeIsApplied }) => {
             <TableCell>{lead.work_type}</TableCell>
             <TableCell>{lead.salary}</TableCell>
             <TableCell>
-              <Link href={lead.URL as string} target="_blank" className="text-blue-600 hover:underline">
+              <Link
+                href={lead.URL as string}
+                target="_blank"
+                className="text-blue-600 hover:underline"
+              >
                 Link here
               </Link>
             </TableCell>

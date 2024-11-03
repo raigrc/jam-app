@@ -5,7 +5,7 @@ export interface LeadsStore {
   setLeads: (data: Leads[]) => void;
   defaultLeadValues: Leads;
   addLeads: (data: Leads) => void;
-  recentLeads: () => void;
+  fetchLeads: () => void;
 }
 
 export interface CardWrapperProps {
