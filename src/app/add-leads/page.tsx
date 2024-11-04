@@ -10,7 +10,7 @@ const AddLeadsPage = () => {
 
   useEffect(() => {
     fetchPlatforms();
-  }, [platforms]);
+  }, [fetchPlatforms]);
 
   return (
     <>
