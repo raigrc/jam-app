@@ -14,7 +14,6 @@ const AddLeadsPage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="flex w-full items-start justify-between space-x-4">
         <LeadsForm platforms={platforms} onUpdate={fetchPlatforms} />
         <RecentApplication />
