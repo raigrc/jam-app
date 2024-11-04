@@ -59,6 +59,7 @@ const LeadsTable: React.FC<LeadsProps> = ({ leads, changeIsApplied }) => {
                   variant="success"
                   size="icon"
                   onClick={() => handleChange(lead.id)}
+                  disabled={isPending}
                 >
                   <FaCheck />
                 </Button>

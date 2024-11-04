@@ -4,9 +4,9 @@ import { Input } from "./ui/input";
 const Filters = ({
   onFilterChange,
 }: {
-  onFilterChange: (value: any) => void;
+  onFilterChange: (value: string) => void;
 }) => {
-  const handleChange = (value: any) => {
+  const handleChange = (value: string) => {
     onFilterChange(value);
   };
   return (

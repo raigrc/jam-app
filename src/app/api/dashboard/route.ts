@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
   try {
     const today = new Date();
     const startOfDay = new Date(today.setHours(0, 0, 0, 0));

@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Header from "./header";
 import { CardWrapperProps } from "@/types";
 import LinkButton from "./link-button";
-import Filters from "./filters";
 
 const CardWrapper: React.FC<CardWrapperProps> = ({
   children,

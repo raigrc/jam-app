@@ -16,7 +16,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FaRegSquarePlus } from "react-icons/fa6";
 
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";

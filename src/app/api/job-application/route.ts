@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   const page = Number(req.nextUrl.searchParams.get("page") || 1);
-  const companyName = req.nextUrl.searchParams.get("company_name");
   try {
     const [application, total] = await Promise.all([
       prisma.leads.findMany({
