@@ -1,7 +1,6 @@
 "use client";
 import LeadsForm from "@/components/leads/leads-form";
 import RecentApplication from "@/components/leads/recent-leads";
-import Navbar from "@/components/navbar";
 import { usePlatformStore } from "@/stores/platform";
 import React, { useEffect } from "react";
 
