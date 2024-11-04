@@ -5,9 +5,17 @@ import JobApplicationTable from "@/components/jobApplication/job-application-tab
 import LeadsPagination from "@/components/leads/leads-pagination";
 import SkeletonTable from "@/components/table-skeleton";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 const JobAppPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <JobAppContent />
+    </Suspense>
+  );
+};
+
+const JobAppContent = () => {
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page") || 1);
 
@@ -35,6 +43,7 @@ const JobAppPage = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData(page);
   }, [page]);
@@ -48,7 +57,6 @@ const JobAppPage = () => {
       }
 
       const data = await response.json();
-
       setApplication(data.filteredLeads);
     } catch (error) {
       console.error("Network error: ", error);
@@ -58,20 +66,19 @@ const JobAppPage = () => {
   const handleFilter = (value: string) => {
     fetchFilter(value);
   };
+
   return (
-    <>
-      <CardWrapper title="Job Application" showButton>
-        <Filters onFilterChange={handleFilter} />
-        <JobApplicationTable
-          leads={application}
-          onStatusChange={() => {
-            fetchData(page);
-          }}
-        />
-        {loading && <SkeletonTable />}
-        <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
-      </CardWrapper>
-    </>
+    <CardWrapper title="Job Application" showButton>
+      <Filters onFilterChange={handleFilter} />
+      <JobApplicationTable
+        leads={application}
+        onStatusChange={() => {
+          fetchData(page);
+        }}
+      />
+      {loading && <SkeletonTable />}
+      <LeadsPagination totalPage={totalPages} currentPage={currentPage} />
+    </CardWrapper>
   );
 };
 

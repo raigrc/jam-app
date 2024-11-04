@@ -7,9 +7,17 @@ import LeadsTable from "@/components/leads/leads-table";
 import SkeletonTable from "@/components/table-skeleton";
 import { useLeadsStore } from "@/stores";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 const LeadsPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LeadsContent />
+    </Suspense>
+  );
+};
+
+const LeadsContent = () => {
   const { leads, setLeads } = useLeadsStore();
   const searchParams = useSearchParams();
 
