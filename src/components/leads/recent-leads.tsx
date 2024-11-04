@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CardWrapper from "../card-wrapper";
 import { useLeadsStore } from "@/stores";
 import {
@@ -12,12 +12,24 @@ import {
 } from "../ui/table";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import RecentSkeleton from "../recent-skeleton";
 
 const RecentApplication = () => {
   const { leads, fetchLeads } = useLeadsStore();
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
-    fetchLeads();
-  }, []);
+    const recentLeads = async () => {
+      setLoading(true);
+      try {
+        await fetchLeads();
+      } catch (error) {
+        console.error("Network error fetching data: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    recentLeads();
+  }, [fetchLeads]);
 
   return (
     <CardWrapper title="Recent Leads" className="w-1/4">
@@ -28,6 +40,7 @@ const RecentApplication = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
+          {loading && <RecentSkeleton />}
           {leads.map((lead, index) => (
             <TableRow key={lead.id || index}>
               <TableCell>

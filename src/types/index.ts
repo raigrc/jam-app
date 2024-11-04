@@ -16,17 +16,17 @@ export interface CardWrapperProps {
 }
 
 export interface Leads {
-  id?: string;
-  company_name: string;
-  account_name: string;
-  platform: string;
-  role: string;
-  advert_role: string;
+  id?: string | undefined;
+  company_name: string | undefined;
+  account_name: string | undefined;
+  platform: string | undefined;
+  role: string | undefined;
+  advert_role: string | undefined;
   skills: string[];
-  work_type: string;
-  salary: string;
-  URL: string;
-  remarks?: string;
+  work_type: string | undefined;
+  salary: string | undefined;
+  URL: string | undefined;
+  remarks?: string | undefined;
   isApplied: boolean;
   createdAt: Date;
   JobApplication?: JobAppProps;

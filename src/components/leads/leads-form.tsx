@@ -69,7 +69,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
             name="company_name"
             render={({ field }) => (
               <FormItem className="">
-                <FormLabel>Company Name:</FormLabel>
+                <FormLabel>
+                  Company Name <span className="text-destructive">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Company name"
@@ -88,7 +90,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
               name="account_name"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Account Name:</FormLabel>
+                  <FormLabel>
+                    Account Name <span className="text-destructive">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="Account name" {...field} />
                   </FormControl>
@@ -102,7 +106,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
               name="platform"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Platform:</FormLabel>
+                  <FormLabel>
+                    Platform <span className="text-destructive">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>
@@ -134,7 +140,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
               name="role"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Role:</FormLabel>
+                  <FormLabel>
+                    Role <span className="text-destructive">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>
@@ -165,7 +173,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
               name="advert_role"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Role from advert:</FormLabel>
+                  <FormLabel>
+                    Role from advert <span className="text-destructive">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="Role from advert" {...field} />
                   </FormControl>
@@ -181,7 +191,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
               name="work_type"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Type of work:</FormLabel>
+                  <FormLabel>
+                    Type of work <span className="text-destructive">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>
@@ -208,7 +220,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
               name="salary"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Salary Range:</FormLabel>
+                  <FormLabel>
+                    Salary Range
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="$1000"
@@ -229,7 +243,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
             name="skills"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Skills:</FormLabel>
+                <FormLabel>
+                  Skills
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="HTML, CSS, JS..."
@@ -252,7 +268,9 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
             name="URL"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL:</FormLabel>
+                <FormLabel>
+                  URL <span className="text-destructive">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="https://..." {...field} />
                 </FormControl>
@@ -266,7 +284,7 @@ const LeadsForm: React.FC<LeadsFormProps> = ({ platforms, onUpdate }) => {
             name="remarks"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Remarks:</FormLabel>
+                <FormLabel>Remarks</FormLabel>
                 <FormControl>
                   <Textarea {...field} className="resize-none" />
                 </FormControl>
