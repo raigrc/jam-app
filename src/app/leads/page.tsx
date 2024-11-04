@@ -59,7 +59,7 @@ const LeadsPage = () => {
     setCurrentPage(page);
   }, [searchParams, applied]);
 
-  const handleFilter = (newValue: any) => {
+  const handleFilter = (newValue: string) => {
     fetchFilter(newValue);
   };
 
