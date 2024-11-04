@@ -37,7 +37,7 @@ const JobAppPage = () => {
   };
   useEffect(() => {
     fetchData(page);
-  });
+  }, [page]);
 
   const fetchFilter = async (value: string) => {
     try {
