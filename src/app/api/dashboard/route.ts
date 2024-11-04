@@ -7,8 +7,8 @@ export const GET = async () => {
     const startOfDay = new Date(today.setHours(0, 0, 0, 0));
     const endOfDay = new Date(today.setHours(23, 59, 59, 999));
 
-    const [pr, leads, applications] = [
-      await prisma.jobApplication.count({
+    const [pr, leads, applications] = await Promise.all([
+      prisma.jobApplication.count({
         where: {
           updatedAt: {
             gte: startOfDay,
@@ -19,12 +19,13 @@ export const GET = async () => {
           },
         },
       }),
-      await prisma.leads.count({}),
-      await prisma.jobApplication.count({}),
-    ];
+      prisma.leads.count({}),
+      prisma.jobApplication.count({}),
+    ]);
 
     return NextResponse.json({ count: { pr, leads, applications } });
   } catch (error) {
     console.error("Unexpected error on fetching data", error);
+    return NextResponse.json({ error: "Network error" });
   }
 };

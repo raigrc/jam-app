@@ -18,25 +18,6 @@ const LeadsPage = () => {
   const [applied, setApplied] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const fetchData = async (page: number) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/leads?page=${page}`);
-      if (!response.ok) {
-        throw new Error("Failed fetching data");
-      }
-      const data = await response.json();
-
-      setLeads(data.leads);
-      setCurrentPage(data.pagination.page);
-      setTotalPages(data.pagination.totalPages);
-    } catch (error) {
-      console.error("Error Fetching leads", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const fetchFilter = async (company_name: string) => {
     try {
       const response = await fetch(
@@ -54,10 +35,28 @@ const LeadsPage = () => {
   };
 
   useEffect(() => {
+    const fetchData = async (page: number) => {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/leads?page=${page}`);
+        if (!response.ok) {
+          throw new Error("Failed fetching data");
+        }
+        const data = await response.json();
+
+        setLeads(data.leads);
+        setCurrentPage(data.pagination.page);
+        setTotalPages(data.pagination.totalPages);
+      } catch (error) {
+        console.error("Error Fetching leads", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     const page = Number(searchParams.get("page")) || 1;
     fetchData(page);
     setCurrentPage(page);
-  }, [searchParams, applied, fetchData]);
+  }, [searchParams, applied]);
 
   const handleFilter = (newValue: string) => {
     fetchFilter(newValue);
