@@ -14,10 +14,8 @@ export const GET = async () => {
             gte: startOfDay,
             lte: endOfDay,
           },
-          NOT: {
-            createdAt: {
-              equals: prisma.jobApplication.fields.updatedAt,
-            },
+          createdAt: {
+            lt: prisma.jobApplication.fields.updatedAt,
           },
         },
       }),
