@@ -57,7 +57,9 @@ const JobApplicationTable: React.FC<LeadsJobProps> = ({
                       ? "bg-yellow-400"
                       : lead.JobApplication?.status == "For Interview"
                         ? "bg-green-400"
-                        : "bg-red-400"
+                        : lead.JobApplication?.status == "Assessment"
+                          ? "bg-emerald-400"
+                          : "bg-red-400"
                   }
                 >
                   {lead.JobApplication?.status}
@@ -82,6 +84,16 @@ const JobApplicationTable: React.FC<LeadsJobProps> = ({
                     value="For Interview"
                   >
                     For Interview
+                  </SelectItem>
+                  <SelectItem
+                    className={
+                      lead.JobApplication?.status == "Assessment"
+                        ? "hidden"
+                        : undefined
+                    }
+                    value="Assessment"
+                  >
+                    Assessment
                   </SelectItem>
                   <SelectItem
                     className={
